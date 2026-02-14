@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Optique Doukala</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    height:100vh;
+    background:linear-gradient(135deg,#ff9ec4,#8affc1);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    overflow:hidden;
+}
+
+.container{
+    text-align:center;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+    padding:50px;
+    border-radius:30px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.3);
+    width:90%;
+    max-width:700px;
+}
+
+h1{
+    font-size:45px;
+    font-weight:800;
+    margin-bottom:20px;
+}
+
+h2{
+    font-size:28px;
+    font-weight:400;
+    margin-bottom:40px;
+}
+
+/* Lunettes */
+.glasses{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.eye{
+    width:120px;
+    height:80px;
+    border:8px solid;
+    border-radius:50%;
+    margin:0 10px;
+    animation:float 3s infinite ease-in-out;
+}
+
+.eye.pink{
+    border-color:#ff4da6;
+}
+
+.eye.green{
+    border-color:#00cc66;
+}
+
+.bridge{
+    width:40px;
+    height:8px;
+    background:white;
+    margin-top:-40px;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+    100%{transform:translateY(0);}
+}
+
+button{
+    padding:15px 30px;
+    border:none;
+    border-radius:30px;
+    background:white;
+    color:#ff4da6;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#00cc66;
+    color:white;
+}
+
+footer{
+    margin-top:30px;
+    font-size:14px;
+    opacity:0.85;
+}
+
+.dev{
+    margin-top:10px;
+    font-size:13px;
+    opacity:0.7;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>👓 Optique Doukala</h1>
+    <h2>Abderrazak Kaissouni</h2>
+
+    <div class="glasses">
+        <div class="eye pink"></div>
+        <div class="bridge"></div>
+        <div class="eye green"></div>
+    </div>
+
+    <button>Découvrir la Collection Enfant</button>
+
+    <footer>
+        Spécialiste des lunettes enfants 👧🧒 | Rose & Vert Style
+        <div class="dev">Développé par Haj Talj</div>
+    </footer>
+
+</div>
+
+</body>
+</html>
