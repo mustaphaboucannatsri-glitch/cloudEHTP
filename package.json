@@ -1,0 +1,17 @@
+{
+  "name": "azure-node-api",
+  "version": "1.0.0",
+  "description": "Simple REST API for Azure Web App",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}
