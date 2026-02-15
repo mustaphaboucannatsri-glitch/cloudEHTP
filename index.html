@@ -1,143 +1,477 @@
-<!DOCTYPE html>
-<html lang="fr">
+
+<!-- Save as: index.html  (front-end only: HTML + CSS + JS, no backend needed) -->
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Optique Doukala</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HomeTech Market — Electronics & Household</title>
+  <style>
+    :root{
+      --bg:#0b0b10; --card:#121224; --text:#f3f4f6; --muted:#a1a1aa;
+      --accent:#60a5fa; --accent2:#f59e0b; --danger:#ef4444;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(96,165,250,.22), transparent 55%),
+        radial-gradient(circle at 80% 20%, rgba(245,158,11,.18), transparent 55%),
+        linear-gradient(180deg,#0b0b10,#0f172a);
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1150px;margin:0 auto;padding:20px}
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    header{
+      position:sticky;top:0;z-index:10;
+      backdrop-filter:blur(10px);
+      background:rgba(11,11,16,.72);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:14px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:950;letter-spacing:.3px}
+    .logo{
+      width:34px;height:34px;border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:0 12px 30px rgba(96,165,250,.20);
+    }
+    .links{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted)}
+    .pill{
+      padding:10px 12px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+    }
+    .btn{
+      cursor:pointer;border:none;border-radius:14px;padding:12px 14px;font-weight:900;
+    }
+    .btnPrimary{background:var(--accent);color:#0b1220;box-shadow:0 12px 30px rgba(96,165,250,.18)}
+    .btnGhost{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.14)}
+    .badge{
+      min-width:22px;height:22px;padding:0 7px;border-radius:999px;
+      background:var(--accent2);color:#111827;font-weight:950;
+      display:inline-flex;align-items:center;justify-content:center;
+    }
+    .cartBtn{display:flex;align-items:center;gap:8px}
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
+    .hero{
+      display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:center;
+      padding:34px 0;
+    }
+    .hero h1{margin:0 0 10px;font-size:clamp(2rem,4vw,3.1rem);line-height:1.05}
+    .hero p{margin:0 0 16px;color:var(--muted);font-size:1.05rem}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .card{
+      background:rgba(18,18,36,.75);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:22px;padding:14px;
+      box-shadow:0 12px 40px rgba(0,0,0,.25);
+    }
+    .img{
+      height:160px;border-radius:18px;margin-bottom:10px;
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        linear-gradient(135deg, rgba(96,165,250,.24), rgba(245,158,11,.18)),
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.14), transparent 50%);
+    }
+    .row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .name{font-weight:950}
+    .muted{color:var(--muted)}
+    .tag{font-size:.85rem;color:var(--muted)}
+    .price{font-weight:950}
 
-body{
-    height:100vh;
-    background:linear-gradient(135deg,#ff9ec4,#8affc1);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:white;
-    overflow:hidden;
-}
+    section{padding:18px 0 30px}
+    .sectionTitle{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:12px}
+    .sectionTitle h2{margin:0;font-size:1.35rem}
 
-.container{
-    text-align:center;
-    background:rgba(255,255,255,0.15);
-    backdrop-filter:blur(15px);
-    padding:50px;
-    border-radius:30px;
-    box-shadow:0 20px 40px rgba(0,0,0,0.3);
-    width:90%;
-    max-width:700px;
-}
+    .filters{display:flex;gap:10px;flex-wrap:wrap}
+    .input{
+      padding:10px 12px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:var(--text);outline:none;
+    }
 
-h1{
-    font-size:45px;
-    font-weight:800;
-    margin-bottom:20px;
-}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    @media (max-width: 980px){ .grid{grid-template-columns:repeat(2,1fr)} .hero{grid-template-columns:1fr} }
+    @media (max-width: 520px){ .grid{grid-template-columns:1fr} }
 
-h2{
-    font-size:28px;
-    font-weight:400;
-    margin-bottom:40px;
-}
-
-/* Lunettes */
-.glasses{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin-bottom:30px;
-}
-
-.eye{
-    width:120px;
-    height:80px;
-    border:8px solid;
-    border-radius:50%;
-    margin:0 10px;
-    animation:float 3s infinite ease-in-out;
-}
-
-.eye.pink{
-    border-color:#ff4da6;
-}
-
-.eye.green{
-    border-color:#00cc66;
-}
-
-.bridge{
-    width:40px;
-    height:8px;
-    background:white;
-    margin-top:-40px;
-}
-
-@keyframes float{
-    0%{transform:translateY(0);}
-    50%{transform:translateY(-10px);}
-    100%{transform:translateY(0);}
-}
-
-button{
-    padding:15px 30px;
-    border:none;
-    border-radius:30px;
-    background:white;
-    color:#ff4da6;
-    font-weight:bold;
-    font-size:16px;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-button:hover{
-    background:#00cc66;
-    color:white;
-}
-
-footer{
-    margin-top:30px;
-    font-size:14px;
-    opacity:0.85;
-}
-
-.dev{
-    margin-top:10px;
-    font-size:13px;
-    opacity:0.7;
-}
-</style>
+    /* Cart drawer */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:30}
+    .drawer{
+      position:fixed;top:0;right:0;height:100%;width:min(430px,92vw);
+      background:rgba(10,10,16,.92);
+      border-left:1px solid rgba(255,255,255,.12);
+      transform:translateX(105%);transition:transform .25s ease;
+      z-index:40;padding:16px;display:flex;flex-direction:column;
+    }
+    .overlay.open{display:block}
+    .drawer.open{transform:translateX(0)}
+    .closeBtn{
+      cursor:pointer;border:none;border-radius:12px;padding:10px 12px;
+      background:rgba(255,255,255,.08);color:var(--text);
+    }
+    .items{margin-top:12px;display:flex;flex-direction:column;gap:10px;overflow:auto;padding-right:6px}
+    .item{
+      display:grid;grid-template-columns:1fr auto;gap:10px;
+      padding:12px;border-radius:18px;border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+    }
+    .qtyRow{display:flex;align-items:center;gap:8px}
+    .qtyBtn{
+      cursor:pointer;width:32px;height:32px;border-radius:10px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.05);color:var(--text);
+    }
+    .divider{height:1px;background:rgba(255,255,255,.10);margin:12px 0}
+    .totalRow{display:flex;align-items:center;justify-content:space-between;font-weight:950}
+    .note{color:var(--muted);font-size:.9rem;margin-top:8px}
+    footer{
+      color:var(--muted);
+      border-top:1px solid rgba(255,255,255,.08);
+      padding:18px 0;margin-top:26px;
+    }
+  </style>
 </head>
 
 <body>
+<header>
+  <div class="container nav">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <span>HomeTech Market</span>
+    </div>
+    <nav class="links">
+      <a class="pill" href="#shop">Shop</a>
+      <a class="pill" href="#deals">Deals</a>
+      <a class="pill" href="#support">Support</a>
+    </nav>
+    <button class="btn btnGhost pill cartBtn" id="openCart" aria-label="Open cart">
+      🛒 Cart <span class="badge" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
 
-<div class="container">
-
-    <h1>👓 Optique Doukala</h1>
-    <h2>Abderrazak Kaissouni</h2>
-
-    <div class="glasses">
-        <div class="eye pink"></div>
-        <div class="bridge"></div>
-        <div class="eye green"></div>
+<main class="container">
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <h1>Electronics & household essentials — in one place.</h1>
+      <p>
+        Browse phones, laptops, kitchen tools, cleaning supplies, and smart home devices.
+        Add to cart and checkout (demo front-end).
+      </p>
+      <div class="cta">
+        <a class="btn btnPrimary" href="#shop">Start shopping</a>
+        <button class="btn btnGhost" id="openCart2">View cart</button>
+      </div>
     </div>
 
-    <button>Découvrir la Collection Enfant</button>
+    <div class="card">
+      <div class="img" aria-hidden="true"></div>
+      <div class="row">
+        <div>
+          <div class="name">Featured Bundle</div>
+          <div class="tag">Smart Home Starter Pack</div>
+        </div>
+        <div class="price">$149.00</div>
+      </div>
+      <p class="muted" style="margin:10px 0 0">
+        Smart plug + LED bulbs + mini speaker — set up in minutes.
+      </p>
+      <button class="btn btnPrimary" data-add="smart_bundle" style="margin-top:12px">Add bundle</button>
+    </div>
+  </section>
 
-    <footer>
-        Spécialiste des lunettes enfants 👧🧒 | Rose & Vert Style
-        <div class="dev">Développé par Haj Talj</div>
-    </footer>
+  <!-- SHOP -->
+  <section id="shop">
+    <div class="sectionTitle">
+      <h2>Shop</h2>
+      <div class="filters">
+        <input class="input" id="search" placeholder="Search products…" />
+        <select class="input" id="category">
+          <option value="all">All categories</option>
+          <option value="electronics">Electronics</option>
+          <option value="household">Household</option>
+          <option value="kitchen">Kitchen</option>
+          <option value="smart">Smart Home</option>
+        </select>
+        <select class="input" id="sort">
+          <option value="featured">Sort: Featured</option>
+          <option value="low">Price: Low → High</option>
+          <option value="high">Price: High → Low</option>
+        </select>
+      </div>
+    </div>
 
-</div>
+    <div class="grid" id="productGrid"></div>
+  </section>
 
+  <!-- DEALS -->
+  <section id="deals">
+    <div class="sectionTitle"><h2>Deals</h2></div>
+    <div class="grid">
+      <div class="card">
+        <div class="name">Weekend Deal</div>
+        <p class="muted">10% off all kitchen items (demo text)</p>
+      </div>
+      <div class="card">
+        <div class="name">Free Delivery</div>
+        <p class="muted">On orders over $50 (demo text)</p>
+      </div>
+      <div class="card">
+        <div class="name">Student Discount</div>
+        <p class="muted">5% off with student ID (demo text)</p>
+      </div>
+      <div class="card">
+        <div class="name">Bundle Savings</div>
+        <p class="muted">Save more on smart home bundles (demo text)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUPPORT -->
+  <section id="support">
+    <div class="sectionTitle"><h2>Support</h2></div>
+    <div class="card">
+      <p class="muted" style="margin:0">
+        Need help? Email: support@hometech.example • Returns: 14 days (demo).
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> HomeTech Market — Front-end demo
+  </footer>
+</main>
+
+<!-- CART -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Cart drawer">
+  <div class="row">
+    <div>
+      <div class="name" style="font-size:1.2rem">Your Cart</div>
+      <div class="tag" id="cartHint">Add items to begin.</div>
+    </div>
+    <button class="closeBtn" id="closeCart">Close</button>
+  </div>
+
+  <div class="items" id="cartItems"></div>
+
+  <div class="divider"></div>
+  <div class="totalRow">
+    <span>Total</span>
+    <span id="cartTotal">$0.00</span>
+  </div>
+
+  <div style="margin-top:auto">
+    <div class="divider"></div>
+    <div class="name">Checkout (demo)</div>
+    <form id="checkoutForm" style="display:grid;gap:10px;margin-top:10px">
+      <input class="input" required name="name" placeholder="Full name" />
+      <input class="input" required type="email" name="email" placeholder="Email" />
+      <input class="input" required name="address" placeholder="Delivery address" />
+      <button class="btn btnPrimary" type="submit">Place order</button>
+    </form>
+    <div class="note" id="orderNote"></div>
+  </div>
+</aside>
+
+<script>
+  const products = [
+    // Electronics
+    { id:"phone", name:"Smartphone X", desc:"6.5” display • 128GB", price:399.00, category:"electronics", featured:true },
+    { id:"laptop", name:"Laptop Air 14", desc:"Lightweight • 16GB RAM", price:799.00, category:"electronics", featured:true },
+    { id:"earbuds", name:"Wireless Earbuds", desc:"Noise isolation • 24h battery", price:59.00, category:"electronics", featured:false },
+    { id:"router", name:"Wi-Fi 6 Router", desc:"Fast coverage • dual-band", price:89.00, category:"electronics", featured:false },
+
+    // Household
+    { id:"detergent", name:"Laundry Detergent", desc:"Fresh scent • 2L", price:12.50, category:"household", featured:true },
+    { id:"towels", name:"Microfiber Towels", desc:"Pack of 6 • extra absorbent", price:14.90, category:"household", featured:false },
+    { id:"vacuum", name:"Compact Vacuum", desc:"Strong suction • lightweight", price:129.00, category:"household", featured:true },
+
+    // Kitchen
+    { id:"airfryer", name:"Air Fryer 5L", desc:"Crispy results • easy clean", price:74.00, category:"kitchen", featured:true },
+    { id:"kettle", name:"Electric Kettle", desc:"1.7L • auto shut-off", price:19.90, category:"kitchen", featured:false },
+    { id:"knife", name:"Knife Set", desc:"Stainless steel • 6 pcs", price:34.90, category:"kitchen", featured:false },
+
+    // Smart Home
+    { id:"smart_plug", name:"Smart Plug", desc:"App control • schedules", price:9.90, category:"smart", featured:false },
+    { id:"smart_bulb", name:"Smart LED Bulb", desc:"RGB • voice control", price:13.90, category:"smart", featured:false },
+    { id:"speaker", name:"Mini Smart Speaker", desc:"Voice assistant • compact", price:39.00, category:"smart", featured:true },
+
+    // Featured bundle
+    { id:"smart_bundle", name:"Smart Home Starter Pack", desc:"Plug + Bulbs + Speaker", price:149.00, category:"smart", featured:true },
+  ];
+
+  const cart = new Map(); // id -> qty
+  const $ = (id) => document.getElementById(id);
+  const money = (n) => `$${n.toFixed(2)}`;
+
+  function filteredProducts(){
+    const q = $("search").value.trim().toLowerCase();
+    const cat = $("category").value;
+    const sort = $("sort").value;
+
+    let list = products.filter(p => {
+      const matchesQ = !q || (p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
+      const matchesCat = (cat === "all") || (p.category === cat);
+      return matchesQ && matchesCat;
+    });
+
+    if (sort === "featured") {
+      list.sort((a,b) => (b.featured === true) - (a.featured === true));
+    } else if (sort === "low") {
+      list.sort((a,b) => a.price - b.price);
+    } else if (sort === "high") {
+      list.sort((a,b) => b.price - a.price);
+    }
+
+    return list;
+  }
+
+  function renderProducts(){
+    const grid = $("productGrid");
+    grid.innerHTML = "";
+
+    filteredProducts().forEach(p => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="img" aria-hidden="true"></div>
+        <div class="row">
+          <div class="name">${p.name}</div>
+          <div class="price">${money(p.price)}</div>
+        </div>
+        <div class="muted" style="margin:8px 0 10px">${p.desc}</div>
+        <div class="row">
+          <span class="tag">Category: ${p.category}${p.featured ? " • ★ Featured" : ""}</span>
+          <button class="btn btnPrimary" data-add="${p.id}">Add</button>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function cartCount(){
+    let c = 0;
+    for (const q of cart.values()) c += q;
+    return c;
+  }
+
+  function cartTotal(){
+    let t = 0;
+    for (const [id, qty] of cart.entries()){
+      const p = products.find(x => x.id === id);
+      if (p) t += p.price * qty;
+    }
+    return t;
+  }
+
+  function renderCart(){
+    $("cartCount").textContent = cartCount();
+    $("cartTotal").textContent = money(cartTotal());
+
+    const items = $("cartItems");
+    items.innerHTML = "";
+
+    if (cart.size === 0){
+      $("cartHint").textContent = "Add items to begin.";
+      return;
+    }
+    $("cartHint").textContent = "Adjust quantities, then checkout.";
+
+    for (const [id, qty] of cart.entries()){
+      const p = products.find(x => x.id === id);
+      if (!p) continue;
+
+      const row = document.createElement("div");
+      row.className = "item";
+      row.innerHTML = `
+        <div>
+          <div class="name">${p.name}</div>
+          <div class="tag">${money(p.price)} each</div>
+          <button class="btn btnGhost" data-remove="${id}" style="margin-top:8px;border-color:rgba(239,68,68,.35)">
+            Remove
+          </button>
+        </div>
+        <div style="text-align:right">
+          <div class="qtyRow" style="justify-content:flex-end">
+            <button class="qtyBtn" data-dec="${id}" aria-label="Decrease">−</button>
+            <b>${qty}</b>
+            <button class="qtyBtn" data-inc="${id}" aria-label="Increase">+</button>
+          </div>
+          <div class="tag" style="margin-top:6px">${money(p.price * qty)}</div>
+        </div>
+      `;
+      items.appendChild(row);
+    }
+  }
+
+  function openCart(){
+    $("overlay").classList.add("open");
+    $("drawer").classList.add("open");
+    renderCart();
+  }
+  function closeCart(){
+    $("overlay").classList.remove("open");
+    $("drawer").classList.remove("open");
+  }
+
+  function addToCart(id){
+    cart.set(id, (cart.get(id) || 0) + 1);
+    renderCart();
+  }
+  function inc(id){ cart.set(id, (cart.get(id)||0) + 1); renderCart(); }
+  function dec(id){
+    const q = (cart.get(id)||0) - 1;
+    if (q <= 0) cart.delete(id); else cart.set(id, q);
+    renderCart();
+  }
+  function removeItem(id){
+    cart.delete(id);
+    renderCart();
+  }
+
+  document.addEventListener("click", (e) => {
+    const add = e.target.closest("[data-add]");
+    const incB = e.target.closest("[data-inc]");
+    const decB = e.target.closest("[data-dec]");
+    const rem = e.target.closest("[data-remove]");
+
+    if (add) addToCart(add.dataset.add);
+    if (incB) inc(incB.dataset.inc);
+    if (decB) dec(decB.dataset.dec);
+    if (rem) removeItem(rem.dataset.remove);
+  });
+
+  $("openCart").addEventListener("click", openCart);
+  $("openCart2").addEventListener("click", openCart);
+  $("closeCart").addEventListener("click", closeCart);
+  $("overlay").addEventListener("click", closeCart);
+
+  $("search").addEventListener("input", renderProducts);
+  $("category").addEventListener("change", renderProducts);
+  $("sort").addEventListener("change", renderProducts);
+
+  $("checkoutForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (cart.size === 0){
+      $("orderNote").textContent = "Your cart is empty—add something first 🙂";
+      return;
+    }
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    $("orderNote").textContent =
+      `Thanks, ${data.name}! (Demo) Order placed for ${money(cartTotal())}. Email: ${data.email}`;
+    cart.clear();
+    renderCart();
+    e.target.reset();
+  });
+
+  $("year").textContent = new Date().getFullYear();
+  renderProducts();
+  renderCart();
+</script>
 </body>
 </html>
